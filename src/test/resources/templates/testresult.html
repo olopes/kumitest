@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test runner result</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="test-dojo.js"></script>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    var player1Name  = /*[[${player ?:"player1"}]]*/;
+    var player2Name  = /*[[${test?:"player2"}]]*/;
+    var successCount = /*[[${successCount}]]*/;
+    var failureCount = /*[[${failureCount}]]*/;
+    /*]]>*/
+    </script>
+</head>
+<body>
+    <p th:text="'Test ' + ${test} + ' result'" />
+    <canvas id="dojoAnimation" style="border:1px solid black; background: url('dojo.png') no-repeat;"></canvas>
+    <div id="failures"  th:if="${not #lists.isEmpty(failures)}">
+    <h3>Failures</h3>
+	<div th:each="failure : ${failures}" class="failure">
+	    <div th:text="'Test: ' + ${failure.test}" class="testname"></div>
+	    <div th:text="${failure.message}" class="testmessage"></div>
+	</div>    
+    </div>
+</body>
+</html>
